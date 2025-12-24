@@ -1,0 +1,73 @@
+title: Servinator
+theme: dark
+color: slate
+background:
+  image: /images/Background.png
+cardBlur: xl
+
+hideVersion: true
+statusStyle: dot
+hideErrors: true
+
+layout:
+  Calendars:
+    tab: Media Details
+    header: false
+    headerStyle: boxed
+    disableCollapse: false
+    useEqualHeights: true
+    style: row
+    columns: 4
+  Server Statistics:
+    tab: Server Details
+    header: false
+    headerStyle: boxed
+    disableCollapse: false
+    useEqualHeights: true
+    style: row
+    columns: 2
+  Media Services:
+    tab: Media Details
+    header: false
+    headerStyle: boxed
+    disableCollapse: false
+    useEqualHeights: true
+    style: row
+    columns: 2
+  Download Clients:
+    tab: Media Details
+    header: false
+    headerStyle: boxed
+    disableCollapse: false
+    useEqualHeights: true
+    style: row
+    columns: 2
+  Arrs Services:
+    tab: Media Details
+    header: false
+    headerStyle: boxed
+    disableCollapse: false
+    useEqualHeights: true
+    style: row
+    columns: 3
+  Home Monitor:
+    tab: Server Details
+    header: false
+    headerStyle: boxed
+    disableCollapse: false
+    useEqualHeights: true
+    style: row
+    columns: 3
+  Other Containers:
+    tab: Server Details
+    header: false
+    headerStyle: boxed
+    disableCollapse: true
+    useEqualHeights: true
+    fiveColumns: true
+    style: row
+    columns: 3
+  Quick Links:
+    style: row
+    columns: 7
+    header: false

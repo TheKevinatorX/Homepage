@@ -1,0 +1,793 @@
+#========== SYSTEM MONITOR ==========#
+- Server Statistics:
+    - CPU:
+        icon: /images/SystemInfo.png
+        href: https://stats.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        widget:
+          type: glances
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:61208
+          metric: cpu
+          version: 4
+          chart: false
+    - Memory:
+        icon: /images/Memory.png
+        href: https://stats.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        widget:
+          type: glances
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:61208
+          metric: memory
+          version: 4
+          chart: false
+    - Processes:
+        icon: /images/CPU.png
+        href: https://stats.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        widget:
+          type: glances
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:61208
+          metric: process
+          version: 4
+          chart: true
+    - Harddrive:
+        icon: /images/LinuxDrive.png
+        href: https://stats.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        widget:
+          type: glances
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:61208
+          metric: fs:/etc/hosts
+          version: 4
+          chart: false
+#========== MEDIA SERVICES ==========#
+- Media Services:
+    - Plex:
+        icon: plex.png
+        href: https://tautulli.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Plex Video Streaming
+        server: Servinator
+        container: Tautulli
+        widget:
+          type: tautulli
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:8181
+          key: "{{HOMEPAGE_VAR_TAUTULLI_API}}"
+          enableUser: false
+          showEpisodeNumber: true
+          expandOneStreamToTwoRows: true
+    - Plexamp:
+        icon: sh-plexamp.png
+        description: Plex Music Streaming
+        server: Servinator
+        container: TautulliMusic
+        widget:
+          type: tautulli
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:8585/
+          key: "{{HOMEPAGE_VAR_TAUTULLI_MUSIC_API}}"
+          enableUser: false
+          showEpisodeNumber: true
+          expandOneStreamToTwoRows: true
+    - Plexinator:
+        icon: plex.svg
+        href: https://plex.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Plex Media Server
+        server: Servinator
+        container: Plex
+        widget:
+          type: plex
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:32400
+          key: "{{HOMEPAGE_VAR_PLEX_API}}"
+          fields:
+            - tv
+            - movies
+    - Jellinator:
+        icon: jellyfin.svg
+        href: https://jellyfin.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Backup Media Server
+        server: Servinator
+        container: Jellyfin
+        widget:
+          type: jellyfin
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:8096
+          key: "{{HOMEPAGE_VAR_JELLYFIN_API}}"
+          fields: 
+            - movies
+            - series
+            - episodes
+            - songs
+          enableBlocks: true
+          enableNowPlaying: false
+    - TitleCardMaker:
+        icon: /images/tcm.png
+        href: https://cards.{{HOMEPAGE_VAR_DOMAIN_NAME}}
+        description: Episode Titlecards
+        server: Servinator
+        container: TitleCardMaker
+        widget:
+          type: customapi
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:4242/api/statistics/system
+          method: GET
+          mappings:
+            - field:
+                1: value
+              label: Shows
+              format: number
+            - field:
+                5: value
+              label: Cards
+              format: number
+            - field:
+                6: value_text
+              label: Size
+              format: float
+              suffix: GB
+    - Immich:
+        icon: immich.svg
+        href: https://photos.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Home Photos and Videos
+        server: Servinator
+        container: Immich-Server
+        widget:
+          type: immich
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:2283
+          key: "{{HOMEPAGE_VAR_IMMICH_KEY}}"
+          version: 2
+          fields:
+            - photos
+            - videos
+    - qBittorrent:
+        icon: qbittorrent.svg
+        href: https://qbit.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Torrent Downloader
+        server: Servinator
+        container: qBittorrent
+        widget:
+          type: qbittorrent
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:8686
+          username: "{{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}"
+          password: "{{HOMEPAGE_VAR_QBITTORRENT_PWD}}"
+          enableLeechProgress: true
+          fields:
+            - seed
+            - download
+            - upload
+    - Usenet:
+        icon: sabnzbd.svg
+        href: https://usenet.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Usenet Downloader
+        server: Servinator
+        container: Sabnzbd
+        widget:
+          type: sabnzbd
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:8808
+          key: "{{HOMEPAGE_VAR_SABNZBD_API}}"
+#========== HOMELAB MANAGEMENT ==========#
+- Home Monitor:
+    - Beszel:
+        icon: beszel.png
+        href: https://beszel.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Ubuntu Server Statistics
+        server: Servinator
+        container: Beszel
+        widget:
+          type: beszel
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:8090
+          username: "{{HOMEPAGE_VAR_BESZEL_USERNAME}}"
+          password: "{{HOMEPAGE_VAR_QBITTORRENT_PWD}}"
+          systemId: Ubuntu
+          version: 2
+          fields:
+            - cpu
+            - memory
+            - disk
+    - Home Router:
+        icon: watchyourlan.png
+        href: https://netalertx.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Home Network Devices
+        server: Servinator
+        container: NetAlertX
+        widget:
+          type: netalertx
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:20211
+          key: "{{HOMEPAGE_VAR_NETALERTX_API}}"
+          fields:
+            - connected
+            - total
+    - Synology NAS:
+        icon: /images/NAS.png
+        href: https://synology.{{HOMEPAGE_VAR_DOMAIN_NAME}}
+        description: Storage
+        server: Servinator
+        container: Sabnzbd
+        widget:
+          type: diskstation
+          url: http://{{HOMEPAGE_VAR_SYNOLOGY_IP}}:5000
+          username: "{{HOMEPAGE_VAR_SYNOLOGY_USERNAME}}"
+          password: "{{HOMEPAGE_VAR_SYNOLOGY_PWD}}"
+          fields:
+            - uptime
+            - volumeAvailable
+    - Authentik:
+        icon: authentik.png
+        href: https://authentik.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Single Sign-On
+        server: Servinator
+        container: Authentik
+        widget:
+          type: authentik
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:9000
+          key: "{{HOMEPAGE_VAR_AUTHENTIK_API}}"
+          version: 2
+          fields:
+            - loginsLast24H
+            - failedLoginsLast24H
+    - Traefik:
+        icon: traefik.svg
+        href: https://traefik.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Reverse Proxy
+        server: Servinator
+        container: Traefik
+        widget:
+          type: traefik
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:8080
+          fields:
+            - routers
+            - services
+            - middleware
+    - Komodo:
+        icon: sh-komodo-light.png
+        href: https://komodo.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Docker Container Management
+        server: Servinator
+        container: Komodo
+        widget:
+          type: komodo
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:9120
+          key: "{{HOMEPAGE_VAR_KOMODO_KEY}}"
+          secret: "{{HOMEPAGE_VAR_KOMODO_SECRET}}"
+          fields:
+            - total
+            - stopped
+            - unhealthy
+    - Uptime-Kuma:
+        icon: /images/Uptime2.png
+        href: https://uptime.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Services Uptime Monitor
+        server: Servinator
+        container: Uptime-Kuma
+        widget:
+          type: uptimekuma
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:3001/
+          slug: ubuntu
+          fields:
+            - up
+            - down
+            - uptime
+    - Speedtest:
+        icon: speedtest-tracker.png
+        href: https://speedtest.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Network Speed Results
+        container: Speedtest
+        widget:
+          type: speedtest
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:2255
+          bitratePrecision: 2
+          fields:
+            - download
+            - upload
+    - Cloudflared:
+        icon: cloudflare.png
+        href: https://one.dash.cloudflare.com
+        description: Remote Access
+        server: Servinator
+        container: Cloudflared
+        widget:
+          type: cloudflared
+          accountid: "{{HOMEPAGE_VAR_CLOUDFLARE_ACCOUNT_ID}}"
+          tunnelid: "{{HOMEPAGE_VAR_CLOUDFLARE_TUNNEL_ID}}"
+          key: "{{HOMEPAGE_VAR_CLOUDFLARE_TOKEN_ID}}"
+          fields:
+            - status
+            - origin_ip
+    - Karakeep:
+        icon: karakeep.png
+        href: https://karakeep.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Web Content Collector
+        container: Karakeep
+        widget:
+          type: karakeep
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:3003
+          key: "{{HOMEPAGE_VAR_KARAKEEP_TOKEN}}"
+          fields:
+            - bookmarks
+            - favorites
+            - archived
+    - Wallos:
+        icon: google-wallet.png
+        href: https://wallos.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Monthly Subscription Payments
+        container: Wallos
+        widget:
+          type: wallos
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:8282
+          key: "{{HOMEPAGE_VAR_WALLOS_KEY}}"
+          fields:
+            - activeSubscriptions
+            - thisMonthlyCost
+            - nextMonthlyCost
+    - Filebrowser:
+        icon: files.png
+        href: https://files.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Ubuntu File Manager
+        container: Filebrowser
+        widget:
+          type: filebrowser
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:7077
+          username:
+          password:
+          authHeader:
+#========== ARRRRS ==========#
+- Arrs Services:
+    - Prowlarr:
+        icon: prowlarr.svg
+        href: https://prowlarr.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Indexer Manager
+        server: Servinator
+        container: Prowlarr
+        widget:
+          type: prowlarr
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:9696
+          key: "{{HOMEPAGE_VAR_PROWLARR_API}}"
+          fields:
+            - numberOfGrabs
+            - numberOfFailGrabs
+            - numberOfQueries
+    - Radarr:
+        icon: radarr.svg
+        href: https://radarr.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Movies Organizer
+        server: Servinator
+        container: Radarr
+        widget:
+          type: radarr
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:7878
+          key: "{{HOMEPAGE_VAR_RADARR_API}}"
+          fields:
+            - movies
+            - wanted
+            - queued
+    - TV Show Sonarr:
+        icon: sonarr.svg
+        href: https://sonarr.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: TV Show Manager
+        server: Servinator
+        container: Sonarr
+        widget:
+          type: sonarr
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:8989
+          key: "{{HOMEPAGE_VAR_SONARR_API}}"
+    - Bazarr:
+        icon: cc-light.png
+        href: https://bazarr.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Subtitles Manager
+        server: Servinator
+        container: Bazarr
+        widget:
+          type: bazarr
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:6767
+          key: "{{HOMEPAGE_VAR_BAZARR_API}}"
+          fields:
+            - missingEpisodes
+            - missingMovies
+    - Anime Sonarr:
+        icon: sonarr.svg
+        href: https://anime.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Anime Show Manager
+        server: Servinator
+        container: Sonarr
+        widget:
+          type: sonarr
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:9898
+          key: "{{HOMEPAGE_VAR_ANIMESONARR_API}}"
+    - Overseerr:
+        icon: overseerr.svg
+        href: https://overseerr.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Media Request
+        server: Servinator
+        container: Overseerr
+        widget:
+          type: overseerr
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:5055
+          key: "{{HOMEPAGE_VAR_OVERSEERR_API}}"
+          fields:
+            - pending
+            - available
+            - processing
+#========== UTILITY CONTAINERS ==========#
+- Other Containers:
+    - Dozzle:
+        icon: dozzle.svg
+        href: https://dozzle.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Docker Container Log Viewer
+        server: Servinator
+        container: Dozzle
+    - Notifiarr:
+        icon: notifiarr.svg
+        href: https://notify.{{HOMEPAGE_VAR_DOMAIN_NAME}}
+        description: Notifications Manager
+        server: Servinator
+        container: Notifiarr
+    - Code Server:
+        icon: vscode.png
+        href: https://vsc.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Visual Studio Code Server
+        server: Servinator
+        container: Code-Server
+    - IT-Tools:
+        icon: it-tools-light.png
+        href: https://tools.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Helpful Developer Tools
+        server: Servinator
+        container: IT-Tools
+    - Trailarr:
+        icon: trailarr.png
+        href: https://trailarr.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Movie Trailer Manager
+        server: Servinator
+        container: Trailarr
+    - Mkdocs:
+        icon: sh-material-for-mkdocs.png
+        href: https://markdown.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Markdown Documentation
+        server: Servinator
+        container: Mkdocs
+    - Metadata Manager:
+        icon: sh-m3u-editor.png
+        href: https://metadata.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Music Metadata Manager
+        server: Servinator
+        container: Metadata
+    - n8n Automation:
+        icon: n8n.png
+        href: https://automation.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Homelab Automation
+        server: Servinator
+        container: Automation
+    - Portainer:
+        icon: sh-portainer.png
+        href: https://portainer.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Backup Container Manager
+        server: Servinator
+        container: Portainer
+    - Daps:
+        icon: /images/daps.png
+        href: https://daps.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Plex Custom Posters
+        server: Servinator
+        container: Daps
+    - Wizarr:
+        icon: wizarr.png
+        href: https://wizarr.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Plex User Invitations
+        server: Servinator
+        container: Wizarr
+    - Mealie:
+        icon: mealie.png
+        href: https://mealie.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Home Recipe Manager
+        server: Servinator
+        container: Mealie
+#========== MEDIA CALENDARS ==========#
+- Calendars:
+    - Upcoming TV Shows:
+        icon: sonarr.svg
+        widget:
+          type: calendar
+          firstDayInWeek: monday
+          view: agenda
+          maxEvents: 8
+          showTime: true
+          integrations:
+            - type: ical
+              url: https://sonarr.{{HOMEPAGE_VAR_DOMAIN_NAME}}/feed/v3/calendar/Sonarr.ics?apikey={{HOMEPAGE_VAR_SONARR_API}}
+              name: TV Shows
+              color: orange
+              params:
+                showName: false
+    - Upcoming Animes:
+        icon: /images/Video2.png
+        widget:
+          type: calendar
+          firstDayInWeek: monday
+          view: agenda
+          maxEvents: 8
+          showTime: true
+          integrations:
+            - type: ical
+              url: "{{HOMEPAGE_VAR_ANIMECALENDAR_URL}}"
+              name: Dubbed Animes
+              color: blue
+              params:
+                showName: false
+    - Recently Added Shows:
+        icon: sonarr.svg
+        id: list
+        widget:
+          type: customapi
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:8181/api/v2?apikey={{HOMEPAGE_VAR_TAUTULLI_API}}&cmd=get_recently_added&count=6&media_type=episode&section_id=2
+          display: list
+          mappings:
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      "0": grandparent_title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        "0": added_at
+                scale: 1000
+                format: relativeDate
+                locale: en-GB
+                numeric: auto
+                style: narrow
+                color: theme
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      "1": grandparent_title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        "1": added_at
+                scale: 1000
+                format: relativeDate
+                locale: en-GB
+                numeric: auto
+                style: narrow
+                color: theme
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      "2": grandparent_title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        "2": added_at
+                scale: 1000
+                format: relativeDate
+                locale: en-GB
+                numeric: auto
+                style: narrow
+                color: theme
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      "3": grandparent_title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        "3": added_at
+                scale: 1000
+                format: relativeDate
+                locale: en-GB
+                numeric: auto
+                style: narrow
+                color: theme
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      "4": grandparent_title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        "4": added_at
+                scale: 1000
+                format: relativeDate
+                locale: en-GB
+                numeric: auto
+                style: narrow
+                color: theme
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      "5": grandparent_title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        "5": added_at
+                scale: 1000
+                format: relativeDate
+                locale: en-GB
+                numeric: auto
+                style: narrow
+                color: theme
+    - Recently Added Movies:
+        icon: radarr.svg
+        id: list
+        widget:
+          type: customapi
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:8181/api/v2?apikey={{HOMEPAGE_VAR_TAUTULLI_API}}&cmd=get_recently_added&count=6&media_type=movie
+          display: list
+          mappings:
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      "0": title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        "0": added_at
+                scale: 1000
+                format: relativeDate
+                locale: en-GB
+                numeric: auto
+                style: narrow
+                color: theme
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      "1": title
+              color: theme
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        "1": added_at
+                scale: 1000
+                format: relativeDate
+                locale: en-GB
+                numeric: auto
+                style: narrow
+                color: theme
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      "2": title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        "2": added_at
+                scale: 1000
+                format: relativeDate
+                locale: en-GB
+                numeric: auto
+                style: narrow
+                color: theme
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      "3": title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        "3": added_at
+                scale: 1000
+                format: relativeDate
+                locale: en-GB
+                numeric: auto
+                style: narrow
+                color: theme
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      "4": title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        "4": added_at
+                scale: 1000
+                format: relativeDate
+                locale: en-GB
+                numeric: auto
+                style: narrow
+                color: theme
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      "5": title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        "5": added_at
+                scale: 1000
+                format: relativeDate
+                locale: en-GB
+                numeric: auto
+                style: narrow
+                color: theme
+#========== QUICK LINKS / BOOKMARKS ==========#
+- Quick Links:
+    - Homepage:
+        icon: /images/homepage.png
+        href: https://gethomepage.dev/
+    - Todoist:
+        icon: todoist.svg
+        href: https://app.todoist.com/
+    - Calendar:
+        icon: google-calendar.svg
+        href: https://calendar.google.com/
+    - Reddit:
+        icon: reddit.svg
+        href: https://www.reddit.com/
+    - YouTube:
+        icon: youtube.svg
+        href: https://youtube.com
+    - Mail:
+        icon: gmail.svg
+        href: https://mail.google.com/
+    - Drive:
+        icon: google-drive.svg
+        href: https://drive.google.com/
+    - Messages:
+        icon: google-messages.svg
+        href: https://messages.google.com/
+    - Keep:
+        icon: google-keep.svg
+        href: https://keep.google.com/
+    - Github:
+        icon: github-light.svg
+        href: https://github.com
+    - Gemini:
+        icon: google-gemini.svg
+        href: https://gemini.google.com/app
+    - Claude:
+        icon: claude-ai.svg
+        href: https://claude.ai/new
+    - Grok:
+        icon: grocy.svg
+        href: https://chatgpt.com/
+    - ChatGPT:
+        icon: simplex-chat.svg
+        href: https://chatgpt.com/
+    - Synology:
+        icon: synology-cloud-sync.png
+        href: https://synology.{{HOMEPAGE_VAR_DOMAIN_NAME}}
+    - Discord:
+        icon: discord.svg
+        href: https://discord.com
+    - Trakt:
+        icon: trakt.svg
+        href: https://trakt.tv/dashboard
+    - Pastebin:
+        icon: pastey.png
+        href: https://pastebin.com/
+    - Photopea:
+        icon: photopea.svg
+        href: https://photopea.com
+    - Amazon:
+        icon: amazon-light.svg
+        href: https://www.amazon.com/
+    - eBay:
+        icon: sh-ebay.png
+        href: https://www.ebay.com/

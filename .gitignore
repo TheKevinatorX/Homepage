@@ -1,0 +1,11 @@
+#========== HOMEPAGE IGNORE ==========#
+
+# Ignore Directories #
+/logs
+
+# Ignore Files
+.env
+custom.js
+kubernetes.yaml
+proxmox.yaml
+bookmarks.yaml

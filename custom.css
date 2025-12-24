@@ -1,0 +1,42 @@
+/* Left align text for Recently Added Widget */
+#list > div > div.relative.flex.flex-row.w-full.service-container {
+  & > div > div {
+    display: block;
+
+    & > div.flex.flex-row.text-right {
+      & > div:nth-child(0) {
+        display: none;
+      }
+
+      & > div:nth-child(1) {
+        text-align: left;
+        margin-left: 0.5rem;
+      }
+
+      & > div:nth-child(2) {
+        text-align: right;
+        margin-left: auto;
+      }
+    }
+  }
+}
+
+/* Left align text for Plex Recently Added*/
+#tautulli_recent > div > div.relative.flex.flex-row.w-full.service-container {
+  & > div > div {
+    display: block;
+    text-align: right; /* Adjusted to align all elements left */
+
+    & > div.flex.flex-row.text-right {
+      & > div:nth-child(1) {
+        text-align: right; /* Adjusted to align left */
+        margin-left: 0.5rem;
+      }
+
+      & > div:nth-child(2) {
+        text-align: right; /* Adjusted to align left */
+        margin-left: auto;
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+- datetime:
+    text_size: xl
+    format:
+    dateStyle: short
+    timeStyle: short
+    hour12: true
+
+- logo:
+    icon: /images/RileyFreeman-Black.jpg
+
+- greeting:
+    text_size: xl
+    text: Servinator
+
+- resources:
+    label: CPU
+    cpu: true
+
+- resources:
+    label: Memory
+    memory: true
+
+- resources:
+    label: Ubuntu
+    disk: /
+
+- resources:
+    label: Movies
+    disk: /media/Movies
+
+- resources:
+    label: Uptime
+    uptime: true
