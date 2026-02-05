@@ -133,7 +133,7 @@
             - videos
     - qBittorrent:
         icon: qbittorrent.svg
-        href: https://qbit.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        href: https://qbittorrent.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
         description: Torrent Downloader
         server: Servinator
         container: qBittorrent
@@ -230,21 +230,22 @@
             - routers
             - services
             - middleware
-    - Komodo:
-        icon: sh-komodo-light.png
-        href: https://komodo.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+    - Arcane:
+        icon: arcane.png
+        href: https://arcane.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
         description: Docker Container Management
         server: Servinator
-        container: Komodo
+        container: Arcane
         widget:
-          type: komodo
-          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:9120
-          key: "{{HOMEPAGE_VAR_KOMODO_KEY}}"
-          secret: "{{HOMEPAGE_VAR_KOMODO_SECRET}}"
+          type: arcane
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:3552
+          env: 0
+          key: "{{HOMEPAGE_VAR_ARCANE_API}}"
           fields:
             - total
+            - running
             - stopped
-            - unhealthy
+            - image_updates
     - Uptime-Kuma:
         icon: /images/Uptime2.png
         href: https://uptime.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
@@ -311,17 +312,18 @@
             - activeSubscriptions
             - thisMonthlyCost
             - nextMonthlyCost
-    - Filebrowser:
-        icon: files.png
-        href: https://files.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
-        description: Ubuntu File Manager
-        container: Filebrowser
+    - Mealie:
+        icon: mealie.png
+        href: http://{{HOMEPAGE_VAR_LOCAL_IP}}:9925
+        description: Home Recipe Manager
+        server: Servinator
+        container: Mealie
         widget:
-          type: filebrowser
-          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:7077
-          username:
-          password:
-          authHeader:
+          type: mealie
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:9925
+          key: "{{HOMEPAGE_VAR_MEALIE_API}}"
+          version: 2 # REQUIRED IF VERSION > 1 | DEFAULTS TO 1
+          fields: ["recipes", "users", "categories", "tags"]
 #========== ARRRRS ==========#
 - Arrs Services:
     - Prowlarr:
@@ -425,12 +427,6 @@
         description: Helpful Developer Tools
         server: Servinator
         container: IT-Tools
-    - Trailarr:
-        icon: trailarr.png
-        href: https://trailarr.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
-        description: Movie Trailer Manager
-        server: Servinator
-        container: Trailarr
     - Mkdocs:
         icon: sh-material-for-mkdocs.png
         href: https://markdown.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
@@ -443,6 +439,29 @@
         description: Music Metadata Manager
         server: Servinator
         container: Metadata
+    - Filebrowser:
+        icon: files.png
+        href: https://files.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Ubuntu File Manager
+        container: Filebrowser                
+    - Media Roulette:
+        icon: /images/mediaroulette.png
+        href: https://roulette.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Media Randomizer
+        server: Servinator
+        container: MediaRoulette
+    - MediaData:
+        icon: /images/Movies.png
+        href: http://{{HOMEPAGE_VAR_LOCAL_IP}}:5005
+        description: Media Information Viewer
+        server: Servinator
+        container: mediadata
+    - Daps:
+        icon: /images/daps.png
+        href: https://daps.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Plex Custom Posters
+        server: Servinator
+        container: Daps    
     - n8n Automation:
         icon: n8n.png
         href: https://automation.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
@@ -455,24 +474,24 @@
         description: Backup Container Manager
         server: Servinator
         container: Portainer
-    - Daps:
-        icon: /images/daps.png
-        href: https://daps.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
-        description: Plex Custom Posters
-        server: Servinator
-        container: Daps
     - Wizarr:
         icon: wizarr.png
         href: https://wizarr.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
         description: Plex User Invitations
         server: Servinator
-        container: Wizarr
-    - Mealie:
-        icon: mealie.png
-        href: https://mealie.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
-        description: Home Recipe Manager
+        container: Wizarr        
+    - Trailarr:
+        icon: trailarr.png
+        href: https://trailarr.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        description: Movie Trailer Manager
         server: Servinator
-        container: Mealie
+        container: Trailarr
+    - Agregarr:
+        icon: agregarr.png
+        href: http://{{HOMEPAGE_VAR_LOCAL_IP}}:7171
+        description: Media Collection Manager
+        server: Servinator
+        container: Agregarr
 #========== MEDIA CALENDARS ==========#
 - Calendars:
     - Upcoming TV Shows:
