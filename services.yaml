@@ -86,7 +86,7 @@
           type: jellyfin
           url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:8096
           key: "{{HOMEPAGE_VAR_JELLYFIN_API}}"
-          fields: 
+          fields:
             - movies
             - series
             - episodes

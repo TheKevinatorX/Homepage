@@ -2,12 +2,12 @@ title: Servinator
 theme: dark
 color: slate
 background:
-  image: /images/Background.png
+  image: /images/background_1.png
 cardBlur: xl
 
 hideVersion: true
 statusStyle: dot
-hideErrors: true
+hideErrors: false
 
 layout:
   Calendars:
