@@ -387,9 +387,9 @@
           type: sonarr
           url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:9898
           key: "{{HOMEPAGE_VAR_ANIMESONARR_API}}"
-    - Overseerr:
+    - Seerr:
         icon: overseerr.svg
-        href: https://overseerr.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
+        href: https://seerr.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
         description: Media Request
         server: Servinator
         container: Seerr
