@@ -392,7 +392,7 @@
         href: https://overseerr.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
         description: Media Request
         server: Servinator
-        container: Overseerr
+        container: Seerr
         widget:
           type: overseerr
           url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:5055
