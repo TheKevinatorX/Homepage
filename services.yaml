@@ -122,7 +122,7 @@
         href: https://photos.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
         description: Home Photos and Videos
         server: Servinator
-        container: Immich-Server
+        container: Immich-UI
         widget:
           type: immich
           url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:2283
@@ -164,7 +164,7 @@
         href: https://beszel.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
         description: Ubuntu Server Statistics
         server: Servinator
-        container: Beszel
+        container: Beszel-UI
         widget:
           type: beszel
           url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:8090
@@ -184,8 +184,9 @@
         container: NetAlertX
         widget:
           type: netalertx
-          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:20211
+          url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:20212
           key: "{{HOMEPAGE_VAR_NETALERTX_API}}"
+          version: 2
           fields:
             - connected
             - total
@@ -208,7 +209,7 @@
         href: https://authentik.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
         description: Single Sign-On
         server: Servinator
-        container: Authentik
+        container: Authentik-UI
         widget:
           type: authentik
           url: http://{{HOMEPAGE_VAR_LOCAL_IP}}:9000
@@ -443,7 +444,7 @@
         icon: files.png
         href: https://files.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
         description: Ubuntu File Manager
-        container: Filebrowser                
+        container: Filebrowser
     - Media Roulette:
         icon: /images/mediaroulette.png
         href: https://roulette.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
@@ -455,19 +456,19 @@
         href: http://{{HOMEPAGE_VAR_LOCAL_IP}}:5005
         description: Media Information Viewer
         server: Servinator
-        container: mediadata
+        container: MediaData
     - Daps:
         icon: /images/daps.png
         href: https://daps.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
         description: Plex Custom Posters
         server: Servinator
-        container: Daps    
+        container: Daps
     - n8n Automation:
         icon: n8n.png
         href: https://automation.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
         description: Homelab Automation
         server: Servinator
-        container: Automation
+        container: Automation-UI
     - Portainer:
         icon: sh-portainer.png
         href: https://portainer.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
@@ -479,7 +480,7 @@
         href: https://wizarr.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
         description: Plex User Invitations
         server: Servinator
-        container: Wizarr        
+        container: Wizarr
     - Trailarr:
         icon: trailarr.png
         href: https://trailarr.{{HOMEPAGE_VAR_DOMAIN_NAME}}/
